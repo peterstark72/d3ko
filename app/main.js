@@ -3,20 +3,23 @@
 
 requirejs.config({
     paths: {
-        d3: "//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min",
-        ko: "//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min"
+        d3: "/lib/d3.min",
+        ko: "/lib/knockout-3.3.0"
     }
 });
 
-require(['ko', './ko-config'], function (ko) {
+require(['ko', 'd3', './ko-config'], function (ko, d3) {
 
-    var vm = {        
+    var vm = {
         today: new Date(),
         ts: ko.observableArray([]),
         shares: ko.observableArray([]),
         value: ko.observable(null),
         bars: ko.observableArray([]),
-        colors: ["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"]
+        colors: ["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"],
+        areaopts: {
+            ticks: d3.time.week
+        }
     };
 
     console.log("Lets go");

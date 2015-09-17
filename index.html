@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css" href="style/demo.css"></style>
+<link rel="stylesheet" type="text/css" href="/style/demo.css"></link>
 </head>
 <body>
 
-<percwidget params="value: value" class="widget md"></percwidget>
-<barwidget params="data: bars" class="widget md"></barwidget>
-<donutwidget params="data: shares, colors: colors" class="widget md">
+<percwidget params="value: value" class="widget"></percwidget>
+<barswidget params="data: bars" class="widget"></barswidget>
+<donutwidget params="data: shares, colors: colors" class="widget">
 	
 </donutwidget>
 
 <linechart params="data: ts" class="chart"></linechart>
-<areachart params="data: ts" class="chart"></areachart>
+<areachart params="data: ts, ticks: 'day', fmt: '%d/%m'" class="chart"></areachart>
 
 <h1 data-bind="number: value, fmt: '.2g'"></h1>
 <h1 data-bind="number: 1000000, fmt: ','"></h1>
@@ -20,7 +20,7 @@
 <h1 data-bind="number: 42"></h1>
 
 <h1 data-bind="time: '2015-09-01'"></h1>
-<h1 data-bind="time: '2015-09-01', fmt: '%d / %m'"></h1>
+<h1 data-bind="time: '2015-09-01', fmt: '%Y-%m-%d'"></h1>
 <h1 data-bind="time: today"></h1>
 
 </body>

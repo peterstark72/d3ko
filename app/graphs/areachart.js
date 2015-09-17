@@ -29,17 +29,20 @@ define(['d3'], function (d3) {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom);
 
-        console.log(width, height);
     }
 
-    function update(element, data) {
+    function update(element, options) {
 
-        console.log("Areachart Update", data);
+        var data = options.data,
+            ticks = options.ticks || 'day',
+            fmt = options.fmt || "%Y-%m-%d";
+
+        console.log("Areachart Options", options);
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .ticks(d3.time.day)
-            .tickFormat(d3.time.format("%Y-%m-%d"))
+            .ticks(d3.time[ticks])
+            .tickFormat(d3.time.format(fmt))
             .tickPadding(10)
             .orient("bottom");
 

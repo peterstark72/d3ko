@@ -13,9 +13,9 @@ define(['d3'], function (d3) {
         labelarc = d3.svg.arc(),
         pie = d3.layout.pie().sort(null);
 
-    var width = 500,
-        height = 500,
-        radius = 250;
+    var width,
+        height,
+        radius;
 
     function init(element) {
 
@@ -33,13 +33,14 @@ define(['d3'], function (d3) {
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     }
 
-    function update(element, data, opts) {
+    function update(element, options) {
 
-        console.log("Donut data = ", data);
-        console.log("Donut colors = ", opts.get('colors'));
+        console.log("Donut options = ", options);
 
-        var color = d3.scale.ordinal().range(opts.get('colors')),
-            svg = d3.select(element).select("svg");
+        var data = options.data,
+            color = options.colors ? d3.scale.ordinal().range(options.colors) : d3.scale.category10();
+
+        var svg = d3.select(element).select("svg");
 
         svg.select("g").selectAll(".arc").remove();
 

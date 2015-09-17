@@ -1,6 +1,10 @@
 body {
 	width: 100%;
 }
+
+h1 {
+	text-align: center;
+}
 .widget {
 	margin: 6px;
 	width: 256px;

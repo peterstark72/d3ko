@@ -1,6 +1,6 @@
 # Knockout Components made with d3 for Data Visualization Dashboards
 
-Widgets and Charts, created with [d3](http://d3js.org), are defined as [Knockout Components](http://knockoutjs.com/documentation/component-overview.html) so they can be embedded with customer elements and dynamic data.  
+Widgets and Charts, created with [d3](http://d3js.org), are defined as [Knockout Components](http://knockoutjs.com/documentation/component-overview.html) so they can be embedded as custom elements and dynamic data.  
 
 With this Knockout Viewmodel: 
 ```

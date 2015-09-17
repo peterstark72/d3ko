@@ -34,9 +34,9 @@ define(['d3'], function (d3) {
             .attr("height", height + margin.top + margin.bottom);
     }
 
-    function update(element, data) {
+    function update(element, options) {
 
-        console.log(data);
+        var data = options.data;
 
         var color = d3.scale.category10();
 
