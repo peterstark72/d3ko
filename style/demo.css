@@ -1,0 +1,65 @@
+body {
+	width: 100%;
+}
+.widget {
+	margin: 6px;
+	width: 256px;
+	height: 256px;	
+	display: inline-block;
+}
+
+.chart {
+	width: 960px;
+	height: 300px;
+	margin: 0;
+	padding: 10px;
+	display: block;
+}
+
+.chart text {
+  font-family: 'Roboto';
+  font-size: 10px;
+}
+
+
+/*Percentage Widget */
+.widget g.arc path {
+	fill: #2c7bb6; /* Background */
+}
+.widget g.arc:first-child path {
+	fill: #d7191c; /* Value */
+}
+
+
+/* Line chart*/
+.chart .line {
+  fill: none;
+  stroke: #5C7EEF;
+  stroke-width: 2.5px;
+  font: 10px sans-serif;  
+}
+
+
+/* Bars Widget */
+.widget g rect {
+	fill: #2c7bb6;
+}
+.widget g:first-child rect {
+	fill: #d7191c;
+}
+
+/* Area chart*/
+.chart path.area {
+	fill: #2c7bb6;
+}
+
+/* Chart Axis */
+.chart .axis path,
+.chart .axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+.chart .tick line{
+    opacity: 0.2;
+ }
