@@ -1,29 +1,44 @@
 "use strict";
-/*global require: true, requirejs: true */
+/*global require: true, requirejs: true, window: true */
 
 requirejs.config({
     paths: {
-        d3: "//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min"
+        d3: "//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min",
+        ko: "//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min"
     }
 });
 
-require(['./gauges/percentage', './gauges/bars', './gauges/donut'], function (prcnt, bars, donut) {
+require(['ko', './ko-config'], function (ko) {
 
-    var COLOR_SCHEME = ["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"],
-        CONTRAST_COLORS = ["#d7191c", "gray"];
+    var vm = {        
+        today: new Date(),
+        ts: ko.observableArray([]),
+        shares: ko.observableArray([]),
+        value: ko.observable(null),
+        bars: ko.observableArray([]),
+        colors: ["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"]
+    };
+
+    console.log("Lets go");
+
+    ko.applyBindings(vm);
+
+    window.setTimeout(function () {vm.value(Math.random()); }, 1000);
+    window.setTimeout(function () {vm.value(Math.random()); }, 3000);
+    window.setTimeout(function () {vm.value(Math.random()); }, 5000);
 
 
-    var e1 = document.getElementById("percentage");
-    prcnt.init(e1);
-    prcnt.update(e1, Math.random(), CONTRAST_COLORS);
-
-    var e2 = document.getElementById("bars");
-    bars.init(e2);
-    bars.update(e2, [Math.random() * 100, Math.random() * 100], CONTRAST_COLORS);
+    window.setTimeout(function () {vm.shares([Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100]); }, 1000);
+    window.setTimeout(function () {vm.shares([Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100]); }, 3000);
+    window.setTimeout(function () {vm.shares([Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100]); }, 5000);
 
 
-    var e3 = document.getElementById("donut");
-    donut.init(e3);
-    donut.update(e3, [Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100], COLOR_SCHEME);
+    window.setTimeout(function () {vm.bars([100 * Math.random(), 100 * Math.random()]); }, 1000);
+    window.setTimeout(function () {vm.bars([100 * Math.random(), 100 * Math.random()]); }, 3000);
+    window.setTimeout(function () {vm.bars([100 * Math.random(), 100 * Math.random()]); }, 5000);
+
+    window.setTimeout(function () {vm.ts([{date: "2015-05-01", value: 100 * Math.random()}, {date: "2015-05-02", value: 100 * Math.random()}, {date: "2015-05-03", value: 100 * Math.random()}, {date: "2015-05-04", value: 100 * Math.random()}, {date: "2015-05-05", value: 100 * Math.random()}]); }, 1000);
+    window.setTimeout(function () {vm.ts([{date: "2015-05-01", value: 100 * Math.random()}, {date: "2015-05-02", value: 100 * Math.random()}, {date: "2015-05-03", value: 100 * Math.random()}, {date: "2015-05-04", value: 100 * Math.random()}, {date: "2015-05-05", value: 100 * Math.random()}]); }, 3000);
+    window.setTimeout(function () {vm.ts([{date: "2015-05-01", value: 100 * Math.random()}, {date: "2015-05-02", value: 100 * Math.random()}, {date: "2015-05-03", value: 100 * Math.random()}, {date: "2015-05-04", value: 100 * Math.random()}, {date: "2015-05-05", value: 100 * Math.random()}]); }, 5000);
 });
 

@@ -13,11 +13,15 @@ define(['d3'], function (d3) {
         labelarc = d3.svg.arc(),
         pie = d3.layout.pie().sort(null);
 
+    var width = 500,
+        height = 500,
+        radius = 250;
+
     function init(element) {
 
-        var width   = element.offsetWidth,
-            height  = element.offsetHeight,
-            radius  = Math.min(width, height) / 2;
+        width = element.offsetWidth;
+        height = element.offsetHeight;
+        radius = Math.min(width, height) / 2;
 
         arc.outerRadius(radius).innerRadius(radius * 0.6);
         labelarc.outerRadius(radius * 0.6).innerRadius(radius * 0.3);
@@ -29,10 +33,14 @@ define(['d3'], function (d3) {
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     }
 
-    function update(element, data, colors) {
+    function update(element, data, opts) {
 
-        var color = d3.scale.ordinal().range(colors),
+        console.log("Donut data = ", data);
+        console.log("Donut colors = ", opts.get('colors'));
+
+        var color = d3.scale.ordinal().range(opts.get('colors')),
             svg = d3.select(element).select("svg");
+
         svg.select("g").selectAll(".arc").remove();
 
         var shares,
@@ -56,8 +64,9 @@ define(['d3'], function (d3) {
         g.append("text")
             .attr("transform", function (d) { return "translate(" + labelarc.centroid(d) + ")"; })
             .style("text-anchor", "middle")
-            .attr("dx", "-13px")
-            .attr("style", "font-size: 1em; font-weight: bold; font-family: sans-serif")
+            .attr("font-family", "sans-serif")
+            .attr("font-weight", "bold")
+            .attr("font-size", 0.12 * radius + "px")
             .attr("fill", "black")
             .text(function (d) { return d.data > 0 ? parseInt(100 * d.data, 10) + "%" : ""; });
     }

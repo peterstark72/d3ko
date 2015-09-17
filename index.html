@@ -3,18 +3,103 @@
 <head>
 <meta charset="utf-8"></meta>
 <style type="text/css">
-.gauge {
-	width: 300px;
-	height: 300px;
-	margin: 10px;	
+body {
+	width: 100%;
+}
+.widget {
+	margin: 6px;	
 	display: inline-block;
 }
+.la {
+	width: 400px;
+	height: 400px;	
+}
+.sm {
+	width: 64px;
+	height: 64px;	
+}
+.md {
+	width: 256px;
+	height: 256px;	
+}
+
+.chart {
+	width: 960px;
+	height: 300px;
+	margin: 0;
+	padding: 10px;
+	display: block;
+}
+.chart text {
+  font-family: 'Roboto';
+  font-size: 10px;
+}
+
+
+/*Percentage Widget */
+g.arc path {
+	fill: #2c7bb6; /* Background */
+}
+g.arc:first-child path {
+	fill: #d7191c; /* Value */
+}
+
+
+/* Line chart*/
+.line {
+  fill: none;
+  stroke: #5C7EEF;
+  stroke-width: 2.5px;
+  font: 10px sans-serif;  
+}
+
+
+/* Bars Widget */
+g rect {
+	fill: #2c7bb6;
+}
+g:first-child rect {
+	fill: #d7191c;
+}
+
+/* Area chart*/
+path.area {
+	fill: #2c7bb6;
+}
+
+/* Axis */
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+.tick line{
+    opacity: 0.2;
+ }
+
 </style>
 </head>
 <body>
-<div class="gauge" id="percentage"></div>
-<div class="gauge" id="bars"></div>
-<div class="gauge" id="donut"></div>
-<script data-main="app/main" src="lib/require.js"></script>
+
+<percwidget params="value: value" class="widget md"></percwidget>
+<barwidget params="data: bars" class="widget md"></barwidget>
+<donutwidget params="data: shares, colors: colors" class="widget md">
+	
+</donutwidget>
+
+<linechart params="data: ts" class="chart"></linechart>
+<areachart params="data: ts" class="chart"></areachart>
+
+<h1 data-bind="number: value, fmt: '.2g'"></h1>
+<h1 data-bind="number: 1000000, fmt: ','"></h1>
+<h1 data-bind="number: 0.87, fmt: '%'"></h1>
+<h1 data-bind="number: 42"></h1>
+
+<h1 data-bind="time: '2015-09-01'"></h1>
+<h1 data-bind="time: '2015-09-01', fmt: '%d / %m'"></h1>
+<h1 data-bind="time: today"></h1>
+
 </body>
+<script data-main="app/main" src="lib/require.js"></script>
 </html>

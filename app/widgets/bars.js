@@ -28,15 +28,16 @@ define(['d3'], function (d3) {
      * @params {Array} data - An array of values
      * @params {Array} colors - An array of CSS colors
     */
-    function update(element, data, colors) {
+    function update(element, data) {
+
+        console.log("Bars: ", data);
 
         if (data.length === 0) {
             // No data, return
             return;
         }
 
-        var color = d3.scale.ordinal().range(colors),
-            width = element.offsetWidth,
+        var width = element.offsetWidth,
             height = element.offsetHeight,
             barWidth = width / data.length;
 
@@ -56,8 +57,7 @@ define(['d3'], function (d3) {
         bar.append("rect")
             .attr("y", function (d) { return y(d); })
             .attr("height", function (d) { return height - y(d); })
-            .attr("width", barWidth - 1)
-            .attr("fill", function (d, i) {return color(i); });
+            .attr("width", barWidth - 1);
 
     }
 
