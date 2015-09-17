@@ -11,3 +11,15 @@ Widgets indicates measurement values in a data visualization dashboard.
 Charts used for timeseries:
 * Areachart
 * Linechart
+
+
+```
+<percwidget params="value: value" class="widget md"></percwidget>
+<barwidget params="data: bars" class="widget md"></barwidget>
+<donutwidget params="data: shares, colors: colors" class="widget md">
+	
+</donutwidget>
+
+<linechart params="data: ts" class="chart"></linechart>
+<areachart params="data: ts" class="chart"></areachart>
+```
