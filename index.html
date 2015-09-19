@@ -5,24 +5,14 @@
 </head>
 <body>
 
-<percwidget params="value: value" class="widget"></percwidget>
 <barswidget params="data: bars" class="widget"></barswidget>
+<percwidget params="value: value" class="widget"></percwidget>
 <donutwidget params="data: shares, colors: colors" class="widget">
-	
 </donutwidget>
-
 <linechart params="data: ts" class="chart"></linechart>
-<areachart params="data: ts, ticks: 'day', fmt: '%d/%m'" class="chart"></areachart>
-
-<h1 data-bind="number: value, fmt: '.2g'"></h1>
-<h1 data-bind="number: 1000000, fmt: ','"></h1>
-<h1 data-bind="number: 0.87, fmt: '%'"></h1>
-<h1 data-bind="number: 42"></h1>
-
-<h1 data-bind="time: '2015-09-01'"></h1>
-<h1 data-bind="time: '2015-09-01', fmt: '%Y-%m-%d'"></h1>
-<h1 data-bind="time: today"></h1>
+<areachart params="data: ts, ticks: 'day', fmt: '%d/%m'" class="chart">
+</areachart>
 
 </body>
-<script data-main="app/main" src="lib/require.js"></script>
+<script src="dist/insyn.js"></script>
 </html>

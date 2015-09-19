@@ -1,26 +1,28 @@
 "use strict";
-/*global define: true */
 
-define(['ko', '../graphs/percwidget'], function (ko, percwidget) {
+var ko = require('knockout');
+var percwidget = require('../graphs/percwidget');
 
-    var html = "<div style='width:100%;height:100%' data-bind='percwidget: options'></div>";
 
-    ko.bindingHandlers.percwidget = {
-        init: function (element) {
-            percwidget.init(element);
-        },
-        update: function (element, valueAccessor) {
+var html = "<div style='width:100%;height:100%' data-bind='percwidget: options'></div>";
 
-            var params = valueAccessor();
+ko.bindingHandlers.percwidget = {
+    init: function (element) {
+        percwidget.init(element);
+    },
+    update: function (element, valueAccessor) {
 
-            console.log("Update Params ", params);
+        var params = valueAccessor();
 
-            percwidget.update(element, ko.unwrap(params.value));
-        }
-    };
+        console.log("Update Params ", params);
 
+        percwidget.update(element, ko.unwrap(params.value));
+    }
+};
+
+module.exports = function () {
     return {
         template: html,
         viewModel: function (params) {this.options = params; }
     };
-});
+};

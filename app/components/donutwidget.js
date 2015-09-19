@@ -1,24 +1,23 @@
 "use strict";
 
 var ko = require('knockout');
-var areachart = require('../graphs/areachart');
+var donutwidget = require('../graphs/donut');
 
-var html = "<div style='width:100%;height:100%' data-bind='areachart: options'></div>";
+var html = "<div style='width:100%;height:100%' data-bind='donutwidget: options'></div>";
 
-ko.bindingHandlers.areachart = {
+ko.bindingHandlers.donutwidget = {
     init: function (element) {
-        areachart.init(element);
+        donutwidget.init(element);
     },
     update: function (element, valueAccessor) {
 
         var params = valueAccessor();
         var opts = {
             data: ko.unwrap(params.data),
-            ticks: ko.unwrap(params.ticks),
-            fmt: ko.unwrap(params.fmt)
+            colors: ko.unwrap(params.colors)
         };
 
-        areachart.update(element, opts);
+        donutwidget.update(element, opts);
     }
 };
 

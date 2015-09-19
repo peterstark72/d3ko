@@ -11,85 +11,86 @@
  * update() - Updates the widget with new data
  *
  */
-define(['d3'], function (d3) {
 
-    var pie = d3.layout.pie().sort(null),
-        arc = d3.svg.arc();
+var d3 = require('d3');
 
-    /**
-     * Creates inital markup
-     * 
-     * @param element {DOMElement}
-     */
-    function init(element) {
+var pie = d3.layout.pie().sort(null),
+    arc = d3.svg.arc();
 
-        var width = element.offsetWidth,
-            height = element.offsetHeight,
-            radius = Math.min(width, height) / 2;
+/**
+ * Creates inital markup
+ * 
+ * @param element {DOMElement}
+ */
+function init(element) {
 
-        var svg = d3.select(element).append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    var width = element.offsetWidth,
+        height = element.offsetHeight,
+        radius = Math.min(width, height) / 2;
 
-        arc.outerRadius(radius).innerRadius(0.75 * radius);
+    var svg = d3.select(element).append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-        var g = svg.selectAll(".arc")
-            .data(pie([0, 1])) // Init data
-            .enter()
-            .append("g")
-            .attr("class", "arc");
+    arc.outerRadius(radius).innerRadius(0.75 * radius);
 
-        g.append("path")
-            .attr("d", arc);
+    var g = svg.selectAll(".arc")
+        .data(pie([0, 1])) // Init data
+        .enter()
+        .append("g")
+        .attr("class", "arc");
 
-        // Text for value and %-sign
-        var t = svg.append("text")
-            .attr("font-family", "sans-serif")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("dy", radius * 0.2)
-            .attr("text-anchor", "middle");
+    g.append("path")
+        .attr("d", arc);
 
-        // Value
-        t.append("tspan")
-            .attr("font-size", radius * 0.6 + "px")
-            .attr("font-weight", "bold");
+    // Text for value and %-sign
+    var t = svg.append("text")
+        .attr("font-family", "sans-serif")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("dy", radius * 0.2)
+        .attr("text-anchor", "middle");
 
-        // Percentage-sign
-        t.append("tspan")
-            .attr("font-size", radius * 0.5 + "px")
-            .attr("font-weight", "normal");
-    }
+    // Value
+    t.append("tspan")
+        .attr("font-size", radius * 0.6 + "px")
+        .attr("font-weight", "bold");
 
-    /**
-     * Updates the widget with new data
-     * 
-     * @param element {DOMElemernt} - the element
-     * @param value {float} - value between 0 and 1
-     *
-     */
-    function update(element, value) {
+    // Percentage-sign
+    t.append("tspan")
+        .attr("font-size", radius * 0.5 + "px")
+        .attr("font-weight", "normal");
+}
 
-        console.log("Percentage: ", value);
+/**
+ * Updates the widget with new data
+ * 
+ * @param element {DOMElemernt} - the element
+ * @param value {float} - value between 0 and 1
+ *
+ */
+function update(element, value) {
 
-        // All above 1 is 
-        var p = value > 1 ? 1 : value;
+    console.log("Percentage: ", value);
 
-        var svg = d3.select(element).select("svg");
+    // All above 1 is 
+    var p = value > 1 ? 1 : value;
 
-        svg.selectAll(".arc")
-            .select("path")
-            .data(pie([p, 1 - p]))
-            .attr("d", arc);
+    var svg = d3.select(element).select("svg");
 
-        var textItems = [Math.round(100 * p), '%'];
+    svg.selectAll(".arc")
+        .select("path")
+        .data(pie([p, 1 - p]))
+        .attr("d", arc);
 
-        svg.select("text")
-            .selectAll("tspan")
-            .text(function (d, i) {return textItems[i]; });
-    }
+    var textItems = [Math.round(100 * p), '%'];
 
-    return {init: init, update: update};
-});
+    svg.select("text")
+        .selectAll("tspan")
+        .text(function (d, i) {return textItems[i]; });
+}
+
+exports.init = init;
+exports.update = update;

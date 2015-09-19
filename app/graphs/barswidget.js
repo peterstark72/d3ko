@@ -1,62 +1,53 @@
 "use strict";
 /*global define: true */
 
+var d3 = require('d3');
 
-/*
-    
-    
+var width,
+    height;
 
+/* Creates the SVG element*/
+function init(element) {
 
-*/
+    width = element.offsetWidth;
+    height = element.offsetHeight;
 
+    d3.select(element)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+}
 
-define(['d3'], function (d3) {
+/* Updates data and redraws the bars*/
+function update(element, data) {
 
-    var width,
-        height;
-
-    /* Creates the SVG element*/
-    function init(element) {
-
-        width = element.offsetWidth;
-        height = element.offsetHeight;
-
-        d3.select(element)
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
+    if (data.length === 0) {
+        return;
     }
 
-    /* Updates data and redraws the bars*/
-    function update(element, data) {
+    var svg = d3.select(element).select("svg");
 
-        if (data.length === 0) {
-            return;
-        }
+    // Remove old elements, if any
+    svg.selectAll("g").remove();
 
-        var svg = d3.select(element).select("svg");
+    var barWidth = width / data.length,
+        bar = svg.selectAll("g")
+                .data(data)
+                .enter()
+                .append("g")
+                .attr("transform", function (d, i) { return "translate(" + i * barWidth + ",0)"; });
 
-        // Remove old elements, if any
-        svg.selectAll("g").remove();
+    // Y scale
+    var y = d3.scale.linear();
+    y.range([height, 0]);
+    y.domain([0, d3.max(data, function (d) { return d; })]);
 
-        var barWidth = width / data.length,
-            bar = svg.selectAll("g")
-                    .data(data)
-                    .enter()
-                    .append("g")
-                    .attr("transform", function (d, i) { return "translate(" + i * barWidth + ",0)"; });
+    // Draw the rectangles
+    bar.append("rect")
+        .attr("y", function (d) { return y(d); })
+        .attr("height", function (d) { return height - y(d); })
+        .attr("width", barWidth - 1);
+}
 
-        // Y scale
-        var y = d3.scale.linear();
-        y.range([height, 0]);
-        y.domain([0, d3.max(data, function (d) { return d; })]);
-
-        // Draw the rectangles
-        bar.append("rect")
-            .attr("y", function (d) { return y(d); })
-            .attr("height", function (d) { return height - y(d); })
-            .attr("width", barWidth - 1);
-    }
-
-    return {init: init, update: update};
-});
+exports.init = init;
+exports.update = update;

@@ -1,0 +1,36 @@
+{
+  "name": "d3ko",
+  "version": "1.0.0",
+  "description": "Dashboard charts and widgets created with d3 and packaged as Knockout components",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/peterstark72/d3ko.git"
+  },
+  "dependencies": {
+    "d3": "^3.5.6",
+    "knockout": "^3.3.0"
+  },
+  "keywords": [
+    "d3",
+    "knockout",
+    "dashboard"
+  ],
+  "author": "Peter Stark <peterstark72@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peterstark72/d3ko/issues"
+  },
+  "homepage": "https://github.com/peterstark72/d3ko#readme",
+  "devDependencies": {
+    "uglify": "^2.3.6",
+    "browserify": "^11.1.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "connect": "^3.4.0",
+    "serve-static": "^1.10.0"
+  }
+}
